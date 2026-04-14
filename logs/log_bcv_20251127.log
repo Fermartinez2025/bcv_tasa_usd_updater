@@ -1,0 +1,126 @@
+2025-11-27 07:51:18 [INFO] Iniciando proceso BCV...
+2025-11-27 07:51:18 [INFO] Modo de ejecución detectado: TARDE
+2025-11-27 07:51:18 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-27 07:51:18 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-27 07:51:19 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-27 07:51:19 [INFO] Iniciando extracción del archivo...
+2025-11-27 07:51:19 [INFO] Datos BCV encontrados: Compra=244.0387, Venta=244.6504, Fecha=2025-11-27
+2025-11-27 07:51:19 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-27 07:51:19 [INFO] Ejecutando SP en SQL 2000 para tarde: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'tarde',
+        '2025-11-27',
+        244.0387, 
+        244.6504
+2025-11-27 07:51:19 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-27 07:51:19 [INFO] Conectando a SMTP en puerto 587...
+2025-11-27 07:51:25 [ERROR] Error CRÍTICO de AUTENTICACIÓN (535): (535, b'5.7.3 Authentication unsuccessful [MN0PR02CA0004.namprd02.prod.outlook.com 2025-11-27T11:46:02.205Z 08DE2D8B3F95E7D5]')
+2025-11-27 07:51:25 [ERROR] ℹ️ Acción Requerida: La contraseña debe ser una Contraseña de Aplicación (App Password) de Office 365.
+2025-11-27 07:51:25 [INFO] Proceso completado correctamente.
+2025-11-27 07:51:25 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-27 08:29:33 [INFO] Iniciando proceso BCV...
+2025-11-27 08:29:33 [INFO] Modo de ejecución detectado: MANANA
+2025-11-27 08:29:33 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-27 08:29:33 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-27 08:29:34 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-27 08:29:34 [INFO] Iniciando extracción del archivo...
+2025-11-27 08:29:34 [INFO] Datos BCV encontrados: Compra=244.0387, Venta=244.6504, Fecha=2025-11-27
+2025-11-27 08:29:34 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-27 08:29:34 [INFO] Ejecutando SP en SQL 2000 para manana: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'manana',
+        '2025-11-27',
+        244.0387, 
+        244.6504
+2025-11-27 08:29:34 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-27 08:29:34 [INFO] Conectando a SMTP en puerto 587...
+2025-11-27 08:29:40 [ERROR] Error CRÍTICO de AUTENTICACIÓN (535): (535, b'5.7.3 Authentication unsuccessful [BN1PR12CA0021.namprd12.prod.outlook.com 2025-11-27T12:24:13.422Z 08DE2D591B692B20]')
+2025-11-27 08:29:40 [ERROR] ℹ️ Acción Requerida: La contraseña debe ser una Contraseña de Aplicación (App Password) de Office 365.
+2025-11-27 08:29:40 [INFO] Proceso completado correctamente.
+2025-11-27 08:29:40 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-27 11:27:25 [INFO] Iniciando proceso BCV...
+2025-11-27 11:27:25 [INFO] Modo de ejecución detectado: MANANA
+2025-11-27 11:27:25 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-27 11:27:25 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-27 11:27:25 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-27 11:27:25 [INFO] Iniciando extracción del archivo...
+2025-11-27 11:27:26 [INFO] Datos BCV encontrados: Compra=244.0387, Venta=244.6504, Fecha=2025-11-27
+2025-11-27 11:27:26 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-27 11:27:26 [INFO] Ejecutando SP en SQL 2000 para manana: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'manana',
+        '2025-11-27',
+        244.0387, 
+        244.6504
+2025-11-27 11:27:26 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-27 11:27:26 [INFO] Conectando a SMTP en puerto 587...
+2025-11-27 11:27:30 [INFO] Correo enviado exitosamente - Tasa de Compra BCV cargada - 27/11/2025
+2025-11-27 11:27:30 [INFO] Proceso completado correctamente.
+2025-11-27 11:27:30 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-27 11:31:17 [INFO] Iniciando proceso BCV...
+2025-11-27 11:31:17 [INFO] Estado de correo limpiado. Registros de los últimos 10 días mantenidos.
+2025-11-27 11:31:17 [INFO] Modo de ejecución detectado: MANANA
+2025-11-27 11:31:18 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-27 11:31:18 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-27 11:31:18 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-27 11:31:18 [INFO] Iniciando extracción del archivo...
+2025-11-27 11:31:18 [INFO] Datos BCV encontrados: Compra=244.0387, Venta=244.6504, Fecha=2025-11-27
+2025-11-27 11:31:18 [WARNING] Tasa de COMPRA para 2025-11-27 ya enviada. Omitiendo.
+2025-11-27 11:31:18 [INFO] Proceso completado correctamente.
+2025-11-27 11:31:18 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-27 12:02:53 [INFO] Iniciando proceso BCV...
+2025-11-27 12:02:53 [INFO] Estado de correo limpiado. Registros de los últimos 10 días mantenidos.
+2025-11-27 12:02:53 [INFO] Modo de ejecución detectado: MANANA
+2025-11-27 12:02:53 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-27 12:02:53 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-27 12:02:53 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-27 12:02:53 [INFO] Iniciando extracción del archivo...
+2025-11-27 12:02:53 [INFO] Datos BCV encontrados: Compra=244.0387, Venta=244.6504, Fecha=2025-11-27
+2025-11-27 12:02:53 [WARNING] Tasa de COMPRA para 2025-11-27 ya enviada. Omitiendo.
+2025-11-27 12:02:53 [INFO] Proceso completado correctamente.
+2025-11-27 12:02:53 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-27 16:48:02 [INFO] Iniciando proceso BCV...
+2025-11-27 16:48:02 [INFO] Estado de correo limpiado. Registros de los últimos 10 días mantenidos.
+2025-11-27 16:48:02 [INFO] Modo de ejecución detectado: TARDE
+2025-11-27 16:48:02 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-27 16:48:02 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-27 16:48:02 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-27 16:48:02 [INFO] Iniciando extracción del archivo...
+2025-11-27 16:48:03 [INFO] Datos BCV encontrados: Compra=244.0387, Venta=244.6504, Fecha=2025-11-27
+2025-11-27 16:48:03 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-27 16:48:03 [INFO] Ejecutando SP en SQL 2000 para tarde: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'tarde',
+        '2025-11-27',
+        244.0387, 
+        244.6504
+2025-11-27 16:48:03 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-27 16:48:03 [ERROR] Error crítico en la ejecución principal: local variable 'asunto' referenced before assignment
+2025-11-27 16:48:05 [INFO] Notificación de fallo enviada: FALLO GENERAL: Proceso BCV
+2025-11-27 16:48:05 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-27 16:55:29 [INFO] Iniciando proceso BCV...
+2025-11-27 16:55:29 [INFO] Estado de correo limpiado. Registros de los últimos 10 días mantenidos.
+2025-11-27 16:55:29 [INFO] Modo de ejecución detectado: TARDE
+2025-11-27 16:55:30 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-27 16:55:30 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-27 16:55:30 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-27 16:55:30 [INFO] Iniciando extracción del archivo...
+2025-11-27 16:55:30 [INFO] Datos BCV encontrados: Compra=244.0387, Venta=244.6504, Fecha=2025-11-27
+2025-11-27 16:55:30 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-27 16:55:30 [INFO] Ejecutando SP en SQL 2000 para tarde: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'tarde',
+        '2025-11-27',
+        244.0387, 
+        244.6504
+2025-11-27 16:55:30 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-27 16:55:30 [INFO] Conectando a SMTP en puerto 587...
+2025-11-27 16:55:32 [INFO] Correo enviado exitosamente - PROCESO FINALIZADO BCV: Tasas 27/11/2025 | C:244.0387 V:244.6504
+2025-11-27 16:55:32 [INFO] Proceso completado correctamente.
+2025-11-27 16:55:32 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-27 17:30:56 [INFO] Iniciando proceso BCV...
+2025-11-27 17:30:56 [INFO] Estado de correo limpiado. Registros de los últimos 10 días mantenidos.
+2025-11-27 17:30:56 [INFO] Modo de ejecución detectado: TARDE
+2025-11-27 17:30:56 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-27 17:30:56 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-27 17:30:56 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-27 17:30:56 [INFO] Iniciando extracción del archivo...
+2025-11-27 17:30:57 [INFO] Datos BCV encontrados: Compra=245.0555, Venta=245.6697, Fecha=2025-11-27
+2025-11-27 17:30:57 [WARNING] Tasa de VENTA para 2025-11-27 ya enviada. Omitiendo.
+2025-11-27 17:30:57 [INFO] Proceso completado correctamente.
+2025-11-27 17:30:57 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.

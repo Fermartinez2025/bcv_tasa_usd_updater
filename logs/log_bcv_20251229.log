@@ -1,0 +1,75 @@
+2025-12-29 08:26:51 [INFO] Iniciando proceso BCV...
+2025-12-29 08:26:51 [INFO] Estado de correo limpiado. Registros de los últimos 10 días mantenidos.
+2025-12-29 08:26:51 [INFO] Modo de ejecución detectado: TARDE
+2025-12-29 08:26:51 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-12-29 08:26:51 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-12-29 08:26:52 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-12-29 08:26:52 [INFO] Iniciando extracción del archivo...
+2025-12-29 08:26:52 [INFO] Datos BCV encontrados: Compra=294.2324, Venta=294.9699, Fecha=2025-12-29
+2025-12-29 08:26:53 [INFO] [DB] Intento 1/3: Ejecutando SP sp_carga_tasa para tarde - fecha=2025-12-29
+2025-12-29 08:26:53 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-12-29 08:26:53 [INFO] [DB] SP returned rc=0 (success) for fecha=2025-12-29; no verification SELECT required.
+2025-12-29 08:26:53 [INFO] Conectando a SMTP en puerto 587...
+2025-12-29 08:26:58 [INFO] Correo enviado exitosamente - PROCESO FINALIZADO BCV: Tasas 29/12/2025 | C:294.2324 V:294.9699
+2025-12-29 08:26:58 [INFO] Proceso completado correctamente.
+2025-12-29 08:26:58 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-12-29 08:27:25 [INFO] Iniciando proceso BCV...
+2025-12-29 08:27:25 [INFO] Estado de correo limpiado. Registros de los últimos 10 días mantenidos.
+2025-12-29 08:27:25 [INFO] Modo de ejecución detectado: MANANA
+2025-12-29 08:27:25 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-12-29 08:27:25 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-12-29 08:27:25 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-12-29 08:27:25 [INFO] Iniciando extracción del archivo...
+2025-12-29 08:27:26 [INFO] Datos BCV encontrados: Compra=294.2324, Venta=294.9699, Fecha=2025-12-29
+2025-12-29 08:27:26 [INFO] [DB] Intento 1/3: Ejecutando SP sp_carga_tasa para manana - fecha=2025-12-29
+2025-12-29 08:27:26 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-12-29 08:27:26 [INFO] [DB] SP returned rc=0 (success) for fecha=2025-12-29; no verification SELECT required.
+2025-12-29 08:27:26 [INFO] Conectando a SMTP en puerto 587...
+2025-12-29 08:27:28 [INFO] Correo enviado exitosamente - ACTUALIZACIÓN 1/2 BCV: Tasa de COMPRA USD - 29/12/2025 (294.2324)
+2025-12-29 08:27:28 [INFO] Proceso completado correctamente.
+2025-12-29 08:27:28 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-12-29 08:35:43 [INFO] Iniciando proceso BCV...
+2025-12-29 08:35:43 [INFO] Estado de correo limpiado. Registros de los últimos 10 días mantenidos.
+2025-12-29 08:35:43 [INFO] Modo de ejecución detectado: MANANA
+2025-12-29 08:35:43 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-12-29 08:35:43 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-12-29 08:35:43 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-12-29 08:35:43 [INFO] Iniciando extracción del archivo...
+2025-12-29 08:35:43 [INFO] Datos BCV encontrados: Compra=294.2324, Venta=294.9699, Fecha=2025-12-29
+2025-12-29 08:35:43 [INFO] [DB] Intento 1/3: Ejecutando SP sp_carga_tasa para manana - fecha=2025-12-29
+2025-12-29 08:35:43 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-12-29 08:35:43 [INFO] [DB] SP returned rc=0 (success) for fecha=2025-12-29; no verification SELECT required.
+2025-12-29 08:35:43 [INFO] Conectando a SMTP en puerto 587...
+2025-12-29 08:35:46 [INFO] Correo enviado exitosamente - ACTUALIZACIÓN 1/2 BCV: Tasa de COMPRA USD - 29/12/2025 (294.2324)
+2025-12-29 08:35:46 [INFO] Proceso completado correctamente.
+2025-12-29 08:35:46 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-12-29 17:17:58 [INFO] Iniciando proceso BCV...
+2025-12-29 17:17:58 [INFO] Estado de correo limpiado. Registros de los últimos 10 días mantenidos.
+2025-12-29 17:17:58 [INFO] Modo de ejecución detectado: MANANA
+2025-12-29 17:17:58 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-12-29 17:17:58 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-12-29 17:17:59 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-12-29 17:17:59 [INFO] Iniciando extracción del archivo...
+2025-12-29 17:17:59 [INFO] Datos BCV encontrados: Compra=297.3977, Venta=298.1431, Fecha=2025-12-29
+2025-12-29 17:17:59 [INFO] [DB] Intento 1/3: Ejecutando SP sp_carga_tasa para manana - fecha=2025-12-29
+2025-12-29 17:17:59 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-12-29 17:17:59 [INFO] [DB] SP returned rc=0 (success) for fecha=2025-12-29; no verification SELECT required.
+2025-12-29 17:17:59 [INFO] Conectando a SMTP en puerto 587...
+2025-12-29 17:18:02 [INFO] Correo enviado exitosamente - ACTUALIZACIÓN 1/2 BCV: Tasa de COMPRA USD - 29/12/2025 (297.3977)
+2025-12-29 17:18:02 [INFO] Proceso completado correctamente.
+2025-12-29 17:18:02 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-12-29 17:18:25 [INFO] Iniciando proceso BCV...
+2025-12-29 17:18:25 [INFO] Estado de correo limpiado. Registros de los últimos 10 días mantenidos.
+2025-12-29 17:18:25 [INFO] Modo de ejecución detectado: TARDE
+2025-12-29 17:18:25 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-12-29 17:18:25 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-12-29 17:18:26 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-12-29 17:18:26 [INFO] Iniciando extracción del archivo...
+2025-12-29 17:18:26 [INFO] Datos BCV encontrados: Compra=297.3977, Venta=298.1431, Fecha=2025-12-29
+2025-12-29 17:18:26 [INFO] [DB] Intento 1/3: Ejecutando SP sp_carga_tasa para tarde - fecha=2025-12-29
+2025-12-29 17:18:26 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-12-29 17:18:26 [INFO] [DB] SP returned rc=0 (success) for fecha=2025-12-29; no verification SELECT required.
+2025-12-29 17:18:26 [INFO] Conectando a SMTP en puerto 587...
+2025-12-29 17:18:31 [INFO] Correo enviado exitosamente - PROCESO FINALIZADO BCV: Tasas 29/12/2025 | C:297.3977 V:298.1431
+2025-12-29 17:18:31 [INFO] Proceso completado correctamente.
+2025-12-29 17:18:31 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.

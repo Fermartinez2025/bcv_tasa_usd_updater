@@ -1,0 +1,28 @@
+2026-03-18 09:00:14 [INFO] === INICIANDO PROCESO DE ACTUALIZACIÓN DE TASAS BCV ===
+2026-03-18 09:00:14 [INFO] Estado de correo limpiado. Registros de los últimos 15 días mantenidos.
+2026-03-18 09:00:14 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2026-03-18 09:00:14 [INFO] Intentando descargar 2_1_2a26_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2a26_smc.xls...
+2026-03-18 09:00:16 [INFO] Archivo descargado: logs\2_1_2a26_smc.xls
+2026-03-18 09:00:16 [INFO] Iniciando extracción del archivo...
+2026-03-18 09:00:16 [INFO] Datos BCV encontrados: Compra=450.3784, Venta=451.5072, Fecha=2026-03-18
+2026-03-18 09:00:16 [INFO] Datos oficiales obtenidos exitosamente para la fecha: 2026-03-18
+2026-03-18 09:00:16 [INFO] [DB] Intento 1/3: Ejecutando SP sp_carga_tasa para manana - fecha=2026-03-18
+2026-03-18 09:00:16 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2026-03-18 09:00:16 [INFO] [DB] SP returned rc=0 (success) for fecha=2026-03-18; no verification SELECT required.
+2026-03-18 09:00:16 [INFO] Conectando a SMTP en puerto 587...
+2026-03-18 09:00:20 [INFO] Correo enviado exitosamente - ACTUALIZACIÓN 1/2 BCV: Tasa de COMPRA USD - 18/03/2026 (450.3784)
+2026-03-18 09:00:20 [INFO] === FIN DEL PROCESO ===
+2026-03-18 16:02:34 [INFO] === INICIANDO PROCESO DE ACTUALIZACIÓN DE TASAS BCV ===
+2026-03-18 16:02:34 [INFO] Estado de correo limpiado. Registros de los últimos 15 días mantenidos.
+2026-03-18 16:02:34 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2026-03-18 16:02:34 [INFO] Intentando descargar 2_1_2a26_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2a26_smc.xls...
+2026-03-18 16:02:35 [INFO] Archivo descargado: logs\2_1_2a26_smc.xls
+2026-03-18 16:02:35 [INFO] Iniciando extracción del archivo...
+2026-03-18 16:02:35 [INFO] Datos BCV encontrados: Compra=450.3784, Venta=451.5072, Fecha=2026-03-18
+2026-03-18 16:02:35 [INFO] Datos oficiales obtenidos exitosamente para la fecha: 2026-03-18
+2026-03-18 16:02:35 [INFO] [DB] Intento 1/3: Ejecutando SP sp_carga_tasa para manana - fecha=2026-03-18
+2026-03-18 16:02:35 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2026-03-18 16:02:35 [INFO] [DB] SP returned rc=0 (success) for fecha=2026-03-18; no verification SELECT required.
+2026-03-18 16:02:35 [INFO] Conectando a SMTP en puerto 587...
+2026-03-18 16:02:39 [INFO] Correo enviado exitosamente - ACTUALIZACIÓN 1/2 BCV: Tasa de COMPRA USD - 18/03/2026 (450.3784)
+2026-03-18 16:02:39 [INFO] === FIN DEL PROCESO ===

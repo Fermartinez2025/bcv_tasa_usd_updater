@@ -1,0 +1,38 @@
+2025-12-05 09:41:24 [INFO] Iniciando proceso BCV...
+2025-12-05 09:41:24 [INFO] Estado de correo limpiado. Registros de los últimos 10 días mantenidos.
+2025-12-05 09:41:24 [INFO] Modo de ejecución detectado: MANANA
+2025-12-05 09:41:25 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-12-05 09:41:25 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-12-05 09:41:25 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-12-05 09:41:25 [INFO] Iniciando extracción del archivo...
+2025-12-05 09:41:25 [INFO] Datos BCV encontrados: Compra=254.2333, Venta=254.8705, Fecha=2025-12-05
+2025-12-05 09:41:25 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-12-05 09:41:25 [INFO] Ejecutando SP en SQL 2000 para manana: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'manana',
+        '2025-12-05',
+        254.2333, 
+        254.8705
+2025-12-05 09:41:25 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-12-05 09:41:25 [INFO] Conectando a SMTP en puerto 587...
+2025-12-05 09:41:29 [INFO] Correo enviado exitosamente - ACTUALIZACIÓN 1/2 BCV: Tasa de COMPRA USD - 05/12/2025 (254.2333)
+2025-12-05 09:41:29 [INFO] Proceso completado correctamente.
+2025-12-05 09:41:29 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-12-05 09:54:43 [INFO] Iniciando proceso BCV...
+2025-12-05 09:54:43 [INFO] Estado de correo limpiado. Registros de los últimos 10 días mantenidos.
+2025-12-05 09:54:43 [INFO] Modo de ejecución detectado: TARDE
+2025-12-05 09:54:43 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-12-05 09:54:43 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-12-05 09:54:44 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-12-05 09:54:44 [INFO] Iniciando extracción del archivo...
+2025-12-05 09:54:44 [INFO] Datos BCV encontrados: Compra=254.2333, Venta=254.8705, Fecha=2025-12-05
+2025-12-05 09:54:44 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-12-05 09:54:44 [INFO] Ejecutando SP en SQL 2000 para tarde: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'tarde',
+        '2025-12-05',
+        254.2333, 
+        254.8705
+2025-12-05 09:54:44 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-12-05 09:54:44 [INFO] Conectando a SMTP en puerto 587...
+2025-12-05 09:54:47 [INFO] Correo enviado exitosamente - PROCESO FINALIZADO BCV: Tasas 05/12/2025 | C:254.2333 V:254.8705
+2025-12-05 09:54:47 [INFO] Proceso completado correctamente.
+2025-12-05 09:54:47 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.

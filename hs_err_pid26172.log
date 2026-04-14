@@ -1,0 +1,225 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 201326592 bytes for G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3536), pid=26172, tid=15600
+#
+# JRE version:  (19.0.2+7) (build )
+# Java VM: OpenJDK 64-Bit Server VM (19.0.2+7, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: --add-modules=ALL-SYSTEM --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -Declipse.application=org.python.pydev.pydev_lsp.application -Dosgi.bundles.defaultStartLevel=4 -Declipse.product=org.python.pydev.pydev_lsp.product -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication c:\Users\fmartinez\.vscode\extensions\fabioz.vscode-pydev-0.16.0\server\plugins\org.eclipse.equinox.launcher_1.6.700.v20240213-1244.jar -configuration c:\Users\fmartinez\.vscode\extensions\fabioz.vscode-pydev-0.16.0\server\config_win -data c:\Users\fmartinez\AppData\Roaming\Code\User\workspaceStorage\d4b3a13a431c3c402db0a096575beffa\fabioz.vscode-pydev\pydev_ws
+
+Host: Intel(R) Core(TM) i5-3570 CPU @ 3.40GHz, 4 cores, 11G,  Windows 10 , 64 bit Build 19041 (10.0.19041.5915)
+Time: Mon Dec 15 08:18:34 2025 Hora estándar de Venezuela elapsed time: 0.091485 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000201d59fdfa0):  JavaThread "Unknown thread" [_thread_in_vm, id=15600, stack(0x00000072bed00000,0x00000072bee00000)]
+
+Stack: [0x00000072bed00000,0x00000072bee00000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x6e9e1a]
+V  [jvm.dll+0x8a36c0]
+V  [jvm.dll+0x8a50ae]
+V  [jvm.dll+0x8a5763]
+V  [jvm.dll+0x27bcdf]
+V  [jvm.dll+0x6e6b39]
+V  [jvm.dll+0x6db58a]
+V  [jvm.dll+0x35267b]
+V  [jvm.dll+0x35a106]
+V  [jvm.dll+0x3b070e]
+V  [jvm.dll+0x3b093f]
+V  [jvm.dll+0x327c4a]
+V  [jvm.dll+0x328aee]
+V  [jvm.dll+0x86e230]
+V  [jvm.dll+0x3bdb31]
+V  [jvm.dll+0x84eb31]
+V  [jvm.dll+0x44583f]
+V  [jvm.dll+0x447321]
+C  [jli.dll+0x5267]
+C  [ucrtbase.dll+0x21bb2]
+C  [KERNEL32.DLL+0x17374]
+C  [ntdll.dll+0x4cc91]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ff817eb05a8, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x00000201d7ab8fa0 WorkerThread "GC Thread#0" [stack: 0x00000072bee00000,0x00000072bef00000] [id=13712]
+  0x00000201d7ac1e10 ConcurrentGCThread "G1 Main Marker" [stack: 0x00000072bef00000,0x00000072bf000000] [id=3876]
+  0x00000201d7ac2750 WorkerThread "G1 Conc#0" [stack: 0x00000072bf000000,0x00000072bf100000] [id=29924]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ff817638687]
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00000201d59fa450] Heap_lock - owner thread: 0x00000201d59fdfa0
+
+Heap address: 0x00000000c0000000, size: 1024 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 0.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 5 size 8 Array Of Cards #cards 12 size 40 Howl #buckets 4 coarsen threshold 1843 Howl Bitmap #cards 512 size 80 coarsen threshold 460 Card regions per heap region 1 cards per card region 2048
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x00000000c0000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ff817a42899]
+
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.018 Loaded shared library C:\Users\fmartinez\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\java.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes loaded (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff61f590000 - 0x00007ff61f59e000 	C:\Users\fmartinez\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\java.exe
+0x00007ff915730000 - 0x00007ff915928000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ff913ec0000 - 0x00007ff913f82000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ff913160000 - 0x00007ff913456000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ff912dc0000 - 0x00007ff912ec0000 	C:\Windows\System32\ucrtbase.dll
+0x00007ff902c60000 - 0x00007ff902c77000 	C:\Users\fmartinez\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\jli.dll
+0x00007ff914b60000 - 0x00007ff914d01000 	C:\Windows\System32\USER32.dll
+0x00007ff912ec0000 - 0x00007ff912ee2000 	C:\Windows\System32\win32u.dll
+0x00007ff902810000 - 0x00007ff902829000 	C:\Users\fmartinez\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\VCRUNTIME140.dll
+0x00007ff913750000 - 0x00007ff91377b000 	C:\Windows\System32\GDI32.dll
+0x00007ff912fa0000 - 0x00007ff9130b9000 	C:\Windows\System32\gdi32full.dll
+0x00007ff9130c0000 - 0x00007ff91315d000 	C:\Windows\System32\msvcp_win.dll
+0x00007ff8f02f0000 - 0x00007ff8f058b000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.6456_none_60b8a6cb71f64256\COMCTL32.dll
+0x00007ff9149f0000 - 0x00007ff914a8e000 	C:\Windows\System32\msvcrt.dll
+0x00007ff914a90000 - 0x00007ff914abf000 	C:\Windows\System32\IMM32.DLL
+0x00007ff903a50000 - 0x00007ff903a5c000 	C:\Users\fmartinez\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\vcruntime140_1.dll
+0x00007ff8f2cf0000 - 0x00007ff8f2d81000 	C:\Users\fmartinez\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\msvcp140.dll
+0x00007ff817300000 - 0x00007ff817ff1000 	C:\Users\fmartinez\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\server\jvm.dll
+0x00007ff9143f0000 - 0x00007ff9144a1000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ff914ac0000 - 0x00007ff914b5f000 	C:\Windows\System32\sechost.dll
+0x00007ff913da0000 - 0x00007ff913ec0000 	C:\Windows\System32\RPCRT4.dll
+0x00007ff912ef0000 - 0x00007ff912f17000 	C:\Windows\System32\bcrypt.dll
+0x00007ff88aea0000 - 0x00007ff88aea9000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007ff914890000 - 0x00007ff9148fb000 	C:\Windows\System32\WS2_32.dll
+0x00007ff9007d0000 - 0x00007ff9007f7000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ff90b890000 - 0x00007ff90b89a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ff910a30000 - 0x00007ff910a42000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007ff9015e0000 - 0x00007ff9015ea000 	C:\Users\fmartinez\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\jimage.dll
+0x00007ff901960000 - 0x00007ff901b61000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ff9017c0000 - 0x00007ff9017f4000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ff9136c0000 - 0x00007ff913742000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ff8f4760000 - 0x00007ff8f4786000 	C:\Users\fmartinez\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Users\fmartinez\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.6456_none_60b8a6cb71f64256;C:\Users\fmartinez\.pydev_vscode\java19\jdk-19.0.2+7-jre\bin\server
+
+VM Arguments:
+jvm_args: --add-modules=ALL-SYSTEM --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -Declipse.application=org.python.pydev.pydev_lsp.application -Dosgi.bundles.defaultStartLevel=4 -Declipse.product=org.python.pydev.pydev_lsp.product -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication 
+java_command: c:\Users\fmartinez\.vscode\extensions\fabioz.vscode-pydev-0.16.0\server\plugins\org.eclipse.equinox.launcher_1.6.700.v20240213-1244.jar -configuration c:\Users\fmartinez\.vscode\extensions\fabioz.vscode-pydev-0.16.0\server\config_win -data c:\Users\fmartinez\AppData\Roaming\Code\User\workspaceStorage\d4b3a13a431c3c402db0a096575beffa\fabioz.vscode-pydev\pydev_ws
+java_class_path (initial): c:\Users\fmartinez\.vscode\extensions\fabioz.vscode-pydev-0.16.0\server\plugins\org.eclipse.equinox.launcher_1.6.700.v20240213-1244.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 3                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 1                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 4                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 201326592                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 1073741824                                {product} {command line}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5832780                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122912730                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122912730                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 1073741824                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {command line}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+     bool UseStringDeduplication                   = true                                      {product} {command line}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;;C:\Program Files\nodejs;C:\Program Files\nodejs\;;C:\Program Files\nodejs;;C:\Program Files\nodejs;C:\Program Files\Docker\Docker\resources\bin;C:\Users\fmartinez\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\fmartinez\AppData\Local\Programs\Python\Python310\;C:\Users\fmartinez\AppData\Local\Microsoft\WindowsApps;C:\Users\fmartinez\AppData\Local\Programs\Git\cmd;%NVM_HOME%;C:\Program Files\nodejs;C:\Users\fmartinez\AppData\Roaming\nvm;C:\Users\fmartinez\AppData\Local\npm-cache;C:\Users\fmartinez\AppData\Roaming\npm;C:\Users\fmartinez\AppData\Local\Programs\Microsoft VS Code\bin
+USERNAME=fmartinez
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 58 Stepping 9, GenuineIntel
+TMP=C:\Users\FMARTI~1\AppData\Local\Temp
+TEMP=C:\Users\FMARTI~1\AppData\Local\Temp
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 10 , 64 bit Build 19041 (10.0.19041.5915)
+OS uptime: 17 days 15:34 hours
+Hyper-V role detected
+
+CPU: total 4 (initial active 4) (4 cores per cpu, 1 threads per core) family 6 model 58 stepping 9 microcode 0x21, cx8, cmov, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, tsc, tscinvbit, avx, aes, erms, clmul, vzeroupper, clflush, hv, rdtscp
+
+Memory: 4k page, system-wide physical 12206M (837M free)
+TotalPageFile size 49070M (AvailPageFile size 626M)
+current process WorkingSet (physical memory assigned to process): 10M, peak: 10M
+current process commit charge ("private bytes"): 51M, peak: 243M
+
+vm_info: OpenJDK 64-Bit Server VM (19.0.2+7) for windows-amd64 JRE (19.0.2+7), built on 2023-01-17T00:00:00Z by "temurin" with MS VC++ 16.7 (VS2019)
+
+END.

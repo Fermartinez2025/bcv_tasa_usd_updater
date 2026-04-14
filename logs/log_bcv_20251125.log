@@ -1,0 +1,320 @@
+2025-11-25 16:15:28 [INFO] Iniciando proceso BCV...
+2025-11-25 16:15:28 [INFO] Modo de ejecución detectado: MANANA
+2025-11-25 16:15:28 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 16:15:28 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 16:15:30 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 16:15:30 [INFO] Iniciando extracción del archivo...
+2025-11-25 16:15:30 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 16:15:30 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 16:15:30 [INFO] Ejecutando SP en SQL 2000 para manana: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'manana',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 16:15:30 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 16:15:30 [INFO] Intentando conexión vía SMTP_SSL en puerto 587...
+2025-11-25 16:15:31 [WARNING] Fallo conexión SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 16:15:31 [INFO] Intentando fallback vía STARTTLS en puerto 587...
+2025-11-25 16:15:37 [ERROR] Error CRÍTICO enviando correo (Fallo en ambos métodos): (535, b'5.7.3 Authentication unsuccessful [BN9PR03CA0728.namprd03.prod.outlook.com 2025-11-25T20:11:08.754Z 08DE2BB4D2778038]')
+2025-11-25 16:15:37 [INFO] Proceso completado correctamente.
+2025-11-25 16:15:37 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 16:20:06 [INFO] Iniciando proceso BCV...
+2025-11-25 16:20:06 [INFO] Modo de ejecución detectado: MANANA
+2025-11-25 16:20:06 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 16:20:06 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 16:20:06 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 16:20:06 [INFO] Iniciando extracción del archivo...
+2025-11-25 16:20:06 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 16:20:06 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 16:20:06 [INFO] Ejecutando SP en SQL 2000 para manana: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'manana',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 16:20:06 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 16:20:06 [INFO] Intentando conexión vía SMTP_SSL en puerto 587...
+2025-11-25 16:20:07 [WARNING] Fallo conexión SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 16:20:07 [INFO] Intentando fallback vía STARTTLS en puerto 587...
+2025-11-25 16:20:07 [ERROR] Error CRÍTICO enviando correo (Fallo en ambos métodos): 'NoneType' object has no attribute 'encode'
+2025-11-25 16:20:07 [INFO] Proceso completado correctamente.
+2025-11-25 16:20:07 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 16:21:37 [INFO] Iniciando proceso BCV...
+2025-11-25 16:21:37 [INFO] Modo de ejecución detectado: MANANA
+2025-11-25 16:21:37 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 16:21:37 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 16:21:37 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 16:21:37 [INFO] Iniciando extracción del archivo...
+2025-11-25 16:21:37 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 16:21:37 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 16:21:37 [INFO] Ejecutando SP en SQL 2000 para manana: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'manana',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 16:21:37 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 16:21:37 [INFO] Intentando conexión vía SMTP_SSL en puerto 587...
+2025-11-25 16:21:38 [WARNING] Fallo conexión SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 16:21:38 [INFO] Intentando fallback vía STARTTLS en puerto 587...
+2025-11-25 16:21:38 [ERROR] Error CRÍTICO enviando correo (Fallo en ambos métodos): 'NoneType' object has no attribute 'encode'
+2025-11-25 16:21:38 [INFO] Proceso completado correctamente.
+2025-11-25 16:21:38 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 16:24:20 [INFO] Iniciando proceso BCV...
+2025-11-25 16:24:20 [INFO] Modo de ejecución detectado: MANANA
+2025-11-25 16:24:20 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 16:24:20 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 16:24:20 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 16:24:20 [INFO] Iniciando extracción del archivo...
+2025-11-25 16:24:20 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 16:24:21 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 16:24:21 [INFO] Ejecutando SP en SQL 2000 para manana: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'manana',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 16:24:21 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 16:24:21 [INFO] Intentando conexión vía SMTP_SSL en puerto 587...
+2025-11-25 16:24:21 [WARNING] Fallo conexión SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 16:24:21 [INFO] Intentando fallback vía STARTTLS en puerto 587...
+2025-11-25 16:24:21 [ERROR] Error CRÍTICO enviando correo (Fallo en ambos métodos): 'ascii' codec can't encode character '\xa1' in position 19: ordinal not in range(128)
+2025-11-25 16:24:21 [INFO] Proceso completado correctamente.
+2025-11-25 16:24:21 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 16:32:14 [INFO] Iniciando proceso BCV...
+2025-11-25 16:32:14 [INFO] Modo de ejecución detectado: MANANA
+2025-11-25 16:32:14 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 16:32:14 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 16:32:15 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 16:32:15 [INFO] Iniciando extracción del archivo...
+2025-11-25 16:32:15 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 16:32:15 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 16:32:15 [INFO] Ejecutando SP en SQL 2000 para manana: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'manana',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 16:32:15 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 16:32:15 [INFO] Intentando conexión via SMTP_SSL en puerto 587...
+2025-11-25 16:32:15 [WARNING] Fallo conexion SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 16:32:15 [INFO] Intentando fallback via STARTTLS en puerto 587...
+2025-11-25 16:32:16 [ERROR] Error CRITICO enviando correo (Fallo en ambos metodos): 'ascii' codec can't encode character '\xa1' in position 19: ordinal not in range(128)
+2025-11-25 16:32:16 [INFO] Proceso completado correctamente.
+2025-11-25 16:32:16 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 16:33:33 [INFO] Iniciando proceso BCV...
+2025-11-25 16:33:33 [INFO] Modo de ejecución detectado: MANANA
+2025-11-25 16:33:33 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 16:33:33 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 16:33:34 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 16:33:34 [INFO] Iniciando extracción del archivo...
+2025-11-25 16:33:34 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 16:33:34 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 16:33:34 [INFO] Ejecutando SP en SQL 2000 para manana: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'manana',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 16:33:34 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 16:33:34 [INFO] Intentando conexión via SMTP_SSL en puerto 587...
+2025-11-25 16:33:34 [WARNING] Fallo conexion SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 16:33:34 [INFO] Intentando fallback via STARTTLS en puerto 587...
+2025-11-25 16:33:35 [ERROR] Error CRITICO enviando correo (Fallo en ambos metodos): 'ascii' codec can't encode character '\xa1' in position 19: ordinal not in range(128)
+2025-11-25 16:33:35 [INFO] Proceso completado correctamente.
+2025-11-25 16:33:35 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 16:42:31 [INFO] Iniciando proceso BCV...
+2025-11-25 16:42:31 [INFO] Modo de ejecución detectado: MANANA
+2025-11-25 16:42:31 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 16:42:31 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 16:42:32 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 16:42:32 [INFO] Iniciando extracción del archivo...
+2025-11-25 16:42:32 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 16:42:32 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 16:42:32 [INFO] Ejecutando SP en SQL 2000 para manana: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'manana',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 16:42:32 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 16:42:32 [INFO] Intentando conexión via SMTP_SSL en puerto 587...
+2025-11-25 16:42:32 [WARNING] Fallo conexion SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 16:42:32 [INFO] Intentando fallback via STARTTLS en puerto 587...
+2025-11-25 16:42:33 [ERROR] Error CRITICO enviando correo (Fallo en ambos metodos): 'ascii' codec can't encode character '\xa1' in position 19: ordinal not in range(128)
+2025-11-25 16:42:33 [INFO] Proceso completado correctamente.
+2025-11-25 16:42:33 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 16:45:03 [INFO] Iniciando proceso BCV...
+2025-11-25 16:45:03 [INFO] Modo de ejecución detectado: MANANA
+2025-11-25 16:45:03 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 16:45:03 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 16:45:03 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 16:45:03 [INFO] Iniciando extracción del archivo...
+2025-11-25 16:45:03 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 16:45:03 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 16:45:03 [INFO] Ejecutando SP en SQL 2000 para manana: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'manana',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 16:45:03 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 16:45:03 [INFO] Intentando conexión via SMTP_SSL en puerto 587...
+2025-11-25 16:45:03 [WARNING] Fallo conexion SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 16:45:03 [INFO] Intentando fallback via STARTTLS en puerto 587...
+2025-11-25 16:45:04 [ERROR] Error CRITICO enviando correo (Fallo en ambos metodos): 'ascii' codec can't encode character '\xa1' in position 19: ordinal not in range(128)
+2025-11-25 16:45:04 [INFO] Proceso completado correctamente.
+2025-11-25 16:45:04 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 16:51:45 [INFO] Iniciando proceso BCV...
+2025-11-25 16:51:45 [INFO] Modo de ejecución detectado: TARDE
+2025-11-25 16:51:45 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 16:51:45 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 16:51:46 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 16:51:46 [INFO] Iniciando extracción del archivo...
+2025-11-25 16:51:46 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 16:51:46 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 16:51:46 [INFO] Ejecutando SP en SQL 2000 para tarde: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'tarde',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 16:51:46 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 16:51:46 [INFO] Intentando conexión via SMTP_SSL en puerto 587...
+2025-11-25 16:51:46 [WARNING] Fallo conexion SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 16:51:46 [INFO] Intentando fallback via STARTTLS en puerto 587...
+2025-11-25 16:51:47 [ERROR] Error CRITICO enviando correo (Fallo en ambos metodos): 'ascii' codec can't encode character '\xa1' in position 19: ordinal not in range(128)
+2025-11-25 16:51:47 [INFO] Proceso completado correctamente.
+2025-11-25 16:51:47 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 16:52:19 [INFO] Iniciando proceso BCV...
+2025-11-25 16:52:19 [INFO] Modo de ejecución detectado: MANANA
+2025-11-25 16:52:19 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 16:52:19 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 16:52:20 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 16:52:20 [INFO] Iniciando extracción del archivo...
+2025-11-25 16:52:20 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 16:52:20 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 16:52:20 [INFO] Ejecutando SP en SQL 2000 para manana: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'manana',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 16:52:20 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 16:52:20 [INFO] Intentando conexión via SMTP_SSL en puerto 587...
+2025-11-25 16:52:20 [WARNING] Fallo conexion SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 16:52:20 [INFO] Intentando fallback via STARTTLS en puerto 587...
+2025-11-25 16:52:21 [ERROR] Error CRITICO enviando correo (Fallo en ambos metodos): 'ascii' codec can't encode character '\xa1' in position 19: ordinal not in range(128)
+2025-11-25 16:52:21 [INFO] Proceso completado correctamente.
+2025-11-25 16:52:21 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 16:53:28 [INFO] Iniciando proceso BCV...
+2025-11-25 16:53:28 [INFO] Modo de ejecución detectado: TARDE
+2025-11-25 16:53:28 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 16:53:28 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 16:53:29 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 16:53:29 [INFO] Iniciando extracción del archivo...
+2025-11-25 16:53:29 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 16:53:29 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 16:53:29 [INFO] Ejecutando SP en SQL 2000 para tarde: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'tarde',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 16:53:29 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 16:53:29 [INFO] Intentando conexión via SMTP_SSL en puerto 587...
+2025-11-25 16:53:29 [WARNING] Fallo conexion SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 16:53:29 [INFO] Intentando fallback via STARTTLS en puerto 587...
+2025-11-25 16:53:30 [ERROR] Error CRITICO enviando correo (Fallo en ambos metodos): 'ascii' codec can't encode character '\xa1' in position 19: ordinal not in range(128)
+2025-11-25 16:53:30 [INFO] Proceso completado correctamente.
+2025-11-25 16:53:30 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 16:54:09 [INFO] Iniciando proceso BCV...
+2025-11-25 16:54:09 [INFO] Modo de ejecución detectado: TARDE
+2025-11-25 16:54:09 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 16:54:09 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 16:54:10 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 16:54:10 [INFO] Iniciando extracción del archivo...
+2025-11-25 16:54:10 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 16:54:10 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 16:54:10 [INFO] Ejecutando SP en SQL 2000 para tarde: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'tarde',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 16:54:10 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 16:54:10 [INFO] Intentando conexión via SMTP_SSL en puerto 587...
+2025-11-25 16:54:10 [WARNING] Fallo conexion SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 16:54:10 [INFO] Intentando fallback via STARTTLS en puerto 587...
+2025-11-25 16:54:11 [ERROR] Error CRITICO enviando correo (Fallo en ambos metodos): 'ascii' codec can't encode character '\xa1' in position 19: ordinal not in range(128)
+2025-11-25 16:54:11 [INFO] Proceso completado correctamente.
+2025-11-25 16:54:11 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 17:14:36 [INFO] Iniciando proceso BCV...
+2025-11-25 17:14:36 [INFO] Modo de ejecución detectado: TARDE
+2025-11-25 17:14:36 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 17:14:36 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 17:14:37 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 17:14:37 [INFO] Iniciando extracción del archivo...
+2025-11-25 17:14:37 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 17:14:37 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 17:14:37 [INFO] Ejecutando SP en SQL 2000 para tarde: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'tarde',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 17:14:37 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 17:14:37 [INFO] Intentando conexión via SMTP_SSL en puerto 587...
+2025-11-25 17:14:38 [WARNING] Fallo conexion SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 17:14:38 [INFO] Intentando fallback via STARTTLS en puerto 587...
+2025-11-25 17:14:38 [ERROR] Error CRITICO enviando correo (Fallo en ambos metodos): 'ascii' codec can't encode character '\xa1' in position 19: ordinal not in range(128)
+2025-11-25 17:14:38 [INFO] Proceso completado correctamente.
+2025-11-25 17:14:38 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 17:15:27 [INFO] Iniciando proceso BCV...
+2025-11-25 17:15:27 [INFO] Modo de ejecución detectado: TARDE
+2025-11-25 17:15:27 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 17:15:27 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 17:15:28 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 17:15:28 [INFO] Iniciando extracción del archivo...
+2025-11-25 17:15:28 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 17:15:28 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 17:15:28 [INFO] Ejecutando SP en SQL 2000 para tarde: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'tarde',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 17:15:28 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 17:15:28 [INFO] Intentando conexión via SMTP_SSL en puerto 587...
+2025-11-25 17:15:28 [WARNING] Fallo conexion SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 17:15:28 [INFO] Intentando fallback via STARTTLS en puerto 587...
+2025-11-25 17:15:29 [ERROR] Error CRITICO enviando correo (Fallo en ambos metodos): 'ascii' codec can't encode character '\xa1' in position 19: ordinal not in range(128)
+2025-11-25 17:15:29 [INFO] Proceso completado correctamente.
+2025-11-25 17:15:29 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 17:17:32 [INFO] Iniciando proceso BCV...
+2025-11-25 17:17:32 [INFO] Modo de ejecución detectado: TARDE
+2025-11-25 17:17:32 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 17:17:32 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 17:17:33 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 17:17:33 [INFO] Iniciando extracción del archivo...
+2025-11-25 17:17:33 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 17:17:33 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 17:17:33 [INFO] Ejecutando SP en SQL 2000 para tarde: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'tarde',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 17:17:33 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 17:17:33 [INFO] Intentando conexión via SMTP_SSL en puerto 587...
+2025-11-25 17:17:33 [WARNING] Fallo conexion SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 17:17:33 [INFO] Intentando fallback via STARTTLS en puerto 587...
+2025-11-25 17:17:34 [ERROR] Error CRITICO enviando correo (Fallo en ambos metodos): 'ascii' codec can't encode character '\xa1' in position 19: ordinal not in range(128)
+2025-11-25 17:17:34 [INFO] Proceso completado correctamente.
+2025-11-25 17:17:34 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
+2025-11-25 17:19:29 [INFO] Iniciando proceso BCV...
+2025-11-25 17:19:29 [INFO] Modo de ejecución detectado: TARDE
+2025-11-25 17:19:29 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2025-11-25 17:19:29 [INFO] Intentando descargar 2_1_2d25_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2d25_smc.xls...
+2025-11-25 17:19:30 [INFO] Archivo descargado: logs\2_1_2d25_smc.xls
+2025-11-25 17:19:30 [INFO] Iniciando extracción del archivo...
+2025-11-25 17:19:30 [INFO] Datos BCV encontrados: Compra=242.5027, Venta=243.1105, Fecha=2025-11-25
+2025-11-25 17:19:30 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2025-11-25 17:19:30 [INFO] Ejecutando SP en SQL 2000 para tarde: EXEC [rep_post_dia].[dbo].[sp_carga_tasa] 
+        'tarde',
+        '2025-11-25',
+        242.5027, 
+        243.1105
+2025-11-25 17:19:30 [INFO] SP ejecutado correctamente. Tasas actualizadas en BD final.
+2025-11-25 17:19:30 [INFO] Intentando conexión via SMTP_SSL en puerto 587...
+2025-11-25 17:19:30 [WARNING] Fallo conexion SSL (465): [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:997)
+2025-11-25 17:19:30 [INFO] Intentando fallback via STARTTLS en puerto 587...
+2025-11-25 17:19:31 [ERROR] Error CRITICO enviando correo (Fallo en ambos metodos): 'ascii' codec can't encode character '\xa1' in position 19: ordinal not in range(128)
+2025-11-25 17:19:31 [INFO] Proceso completado correctamente.
+2025-11-25 17:19:31 [INFO] Archivo temporal 2_1_2d25_smc.xls eliminado.
