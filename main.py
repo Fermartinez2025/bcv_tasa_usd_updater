@@ -591,7 +591,7 @@ def enviar_correo(tipo, fecha, valor_compra, valor_venta, contingencia=False):
         cuerpo_html = f"""
         <html><body>
 <p>Estimado(a) equipo,</p>
-<p>Se informa que el proceso de actualización matutino de la Tasa de Referencia del BCV ha concluido satisfactoriamente. Los datos han sido cargados en la base de datos DESARROLLO.</p>
+<p>Se informa que el proceso de actualización matutino de la Tasa de Referencia del BCV ha concluido satisfactoriamente. Los datos han sido cargados en la base de datos.</p>
 
 <h3>Detalle de Tasa (Operación {fecha.strftime('%d/%m/%Y')})</h3>
 <table border="1" cellpadding="5" cellspacing="0" style="width:50%; border-collapse: collapse;">
@@ -625,7 +625,7 @@ def enviar_correo(tipo, fecha, valor_compra, valor_venta, contingencia=False):
         cuerpo_html = f"""
         <html><body>
 <p>Estimado(a) equipo,</p>
-<p>El proceso vespertino de tasas de referencia BCV para el día **{fecha.strftime('%d/%m/%Y')}** ha finalizado con éxito. Las tasas han sido actualizadas y transferidas a la base de datos de DESARROLLO.</p>
+<p>El proceso vespertino de tasas de referencia BCV para el día **{fecha.strftime('%d/%m/%Y')}** ha finalizado con éxito. Las tasas han sido actualizadas y transferidas a la base de datos.</p>
 
 <h3>Resumen Final de Tasas USD</h3>
 <table border="1" cellpadding="5" cellspacing="0" style="width:50%; border-collapse: collapse;">
