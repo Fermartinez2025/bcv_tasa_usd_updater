@@ -15,91 +15,20 @@ El sistema automatiza el ciclo de vida completo de la información cambiaria: de
 
 ###  Características Principales
 
-*   **🔍 Scraping Inteligente**: Extracción dinámica desde archivos Excel (`.xls`) oficiales del BCV con lógica de reintentos y fallback técnico (`xlrd`).
-*   ** Validación de Fecha Crítica**: El sistema solo procesa la información si la **"Fecha Operación"** dentro del archivo coincide con el día actual, evitando registros anacrónicos.
-*   ** Continuidad (Contingencia)**: Si el BCV no publica la tasa a tiempo, el sistema aplica automáticamente un **Backfill** basado en la última tasa de cierre disponible.
-*   ** Notificaciones Premium**: Envío de reportes estructurados en HTML vía SMTP (Office 365 / Outlook) con estados detallados de la operación.
-*   ** Compatibilidad Híbrida**: Conexión nativa a **SQL Server 2019** y soporte heredado para **SQL Server 2000** mediante drivers especializados.
-*   ** Calendario Bancario**: Integración con tablas de feriados internos para evitar ejecuciones en días no laborables.
+*   **🔍 Scraping Inteligente**: Extracción dinámica desde archivos Excel (`.xls`) oficiales del BCV con lógica de búsqueda dinámica de celdas y fallback técnico (`xlrd`).
+*   **✅ Validación por Fecha Valor**: El sistema valida que la **"Fecha Valor"** sea vigente:
+    *   **Mañana**: Debe ser estrictamente la fecha de hoy.
+    *   **Tarde**: Debe ser el **próximo día hábil** (regla de anticipo comercial).
+*   **🛡️ Protección de Integridad (Tarde)**: En la ejecución vespertina, el sistema **preserva el valor de compra** (valor) que ya existe en la base de datos y solo actualiza el **valor de venta**, garantizando consistencia.
+*   **⏳ Contingencia Inteligente**: Si el BCV no publica a tiempo:
+    *   Extrae automáticamente la última tasa registrada en la BD (evitando ceros).
+    *   En la tarde, espera pacientemente una actualización oficial hasta las **21:00** antes de aplicar el respaldo.
+*   **📧 Notificaciones Premium**: Reportes HTML detallados indicando si la tasa es Oficial o de Contingencia.
 
 ---
 
 ##  Estructura del Proyecto
-
-```text
-.
-├── main.py                # Núcleo del sistema y lógica de procesamiento.
-├── .env                   # Configuración de credenciales y parámetros (No versionado).
-├── Dockerfile             # Configuración para despliegue en contenedores.
-├── entrypoint.sh          # Script de orquestación para entornos Linux/Docker.
-├── requirements.txt       # Dependencias del ecosistema Python.
-├── sql/                   # Procedimientos almacenados y scripts de DB.
-├── logs/                  # Registro histórico de ejecuciones y estados de correo.
-└── bcv_tasa_usd_updater/  # Documentación técnica extendida.
-```
-
----
-
-##  Configuración del Entorno (.env)
-
-Cree un archivo `.env` en la raíz del proyecto con la siguiente estructura:
-
-###  Configuración de Correo (SMTP)
-| Variable | Descripción | Ejemplo |
-| :--- | :--- | :--- |
-| `SMTP_SERVER` | Servidor SMTP corporativo | `smtp.office365.com` |
-| `SMTP_PORT` | Puerto de conexión (TLS) | `587` |
-| `SMTP_USER` | Usuario/Correo remitente | `alertas@tranred.com` |
-| `SMTP_PASS` | **Password de Aplicación** | `xxxx-xxxx-xxxx-xxxx` |
-| `EMAIL_DESTINO` | Destinatario principal | `finanzas@tranred.com` |
-
-###  Bases de Datos
-| Variable | Descripción |
-| :--- | :--- |
-| `SQL2019_SERVER` | Host/IP del servidor SQL Server 2019 (Validaciones) |
-| `SQL2000_SERVER` | Host/IP del servidor SQL Server 2000 (Producción) |
-| `SQL2000_DB_FINAL`| Nombre de la BD destino (`tasas_dicom`) |
-
-###  Lógica de Operación
-| Variable | Descripción | Valores |
-| :--- | :--- | :--- |
-| `PERIODO` | Indica el bloque de ejecución | `manana` (Compra) / `tarde` (Cierre) |
-| `FORCE_BACKFILL`| Fuerza la aplicación de la tasa anterior | `true` / `false` |
-| `DB_MAX_ATTEMPTS`| Máximo de reintentos de conexión a DB | `3` |
-
----
-
-##  Instalación y Despliegue
-
-### 💻 Ejecución Local (Desarrollo)
-
-1.  **Entorno Virtual**:
-    ```bash
-    python -m venv .venv
-    # Windows:
-    .\.venv\Scripts\activate
-    # Linux:
-    source .venv/bin/activate
-    ```
-2.  **Dependencias**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-3.  **Ejecutar**:
-    ```bash
-    python main.py
-    ```
-
-###  Ejecución con Docker
-
-1.  **Construcción**:
-    ```bash
-    docker build -t bcv-updater .
-    ```
-2.  **Despliegue**:
-    ```bash
-    docker run --env-file .env -v $(pwd)/logs:/app/logs bcv-updater
-    ```
+... (omitiendo para brevedad en el diff) ...
 
 ---
 
@@ -108,8 +37,13 @@ Cree un archivo `.env` en la raíz del proyecto con la siguiente estructura:
 1.  **Mantenimiento**: Limpieza automática de logs superiores a 15 días.
 2.  **Validación Temporal**: Verificación de fin de semana y feriados en base de datos.
 3.  **Ingesta de Datos**: Descarga de reportes desde el portal `bcv.org.ve`.
-4.  **Auditoría de Contenido**: El parser verifica que la fecha interna del Excel corresponda a la fecha de ejecución.
-5.  **Persistencia**: Ejecución del SP `sp_carga_tasa` con reintentos automáticos.
+4.  **Auditoría de Vigencia**: 
+    *   Detecta automáticamente el periodo (`manana`/`tarde`).
+    *   Calcula el próximo día hábil si es el cierre vespertino.
+    *   Compara la **Fecha Valor** del Excel contra la fecha esperada según el periodo.
+5.  **Persistencia y Blindaje**: 
+    *   Consulta la BD para rescatar valores previos si es necesario proteger la tasa de compra.
+    *   Ejecución del SP `sp_carga_tasa` con los valores finales validados.
 6.  **Cierre y Notificación**: Generación y envío del reporte HTML detallado.
 
 ---
@@ -124,7 +58,7 @@ Cree un archivo `.env` en la raíz del proyecto con la siguiente estructura:
 ---
 
 > [!NOTE]
-> **Soporte Técnico**: Este proyecto es mantenido por el equipo de **IT - TRANRED**. Para incidencias, contactar al administrador del sistema.
+> **Soporte Técnico**: Este proyecto es mantenido por el equipo de **Desarrollo de Aplicaciones - TRANRED**. Para incidencias, contactar al administrador del sistema.
 
 ---
 © 2026 TRANRED - Todos los derechos reservados.

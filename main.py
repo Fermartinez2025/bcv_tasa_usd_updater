@@ -172,13 +172,24 @@ def es_dia_habil(fecha):
     try:
         conn = get_db_connection(2019)
         cursor = conn.cursor()
-        cursor.execute("SELECT COUNT(*) FROM dias_feriados WHERE DIAS = ?", fecha.strftime("%Y-%m-%d"))
+        # Cambiado: ahora consulta la tabla Feriados_Abonos y la columna # Fecha
+        cursor.execute("SELECT COUNT(*) FROM Feriados_Abonos WHERE Fecha = ?", fecha.strftime("%Y-%m-%d"))
         resultado = cursor.fetchone()
         conn.close()
         return resultado[0] == 0
     except Exception as e:
         logging.warning(f"Error al verificar feriados: {e}. Asumiendo día hábil.")
         return True
+
+def obtener_proximo_dia_habil(fecha_base):
+    """Calcula el próximo día hábil a partir de una fecha dada."""
+    proximo = fecha_base + datetime.timedelta(days=1)
+    # Buscamos en un rango de 10 días para estar seguros (puentes largos)
+    for _ in range(10):
+        if es_dia_habil(proximo):
+            return proximo
+        proximo += datetime.timedelta(days=1)
+    return proximo
 
 def generar_nombre_archivo(fecha):
     """Genera el nombre del archivo BCV basado en el trimestre y año."""
@@ -255,7 +266,7 @@ def extraer_tasa_usd(filepath):
 
             tasa_compra_excel = None
             tasa_venta_excel = None
-            fecha_operacion = date.today()
+            fecha_operacion = None  # Inicializamos en None para validar obligatoriamente contra el archivo
 
             # Búsqueda de la fila del USD y la fecha
             for _, row in df.iterrows():
@@ -272,16 +283,54 @@ def extraer_tasa_usd(filepath):
                             logging.warning(f"Tasas muy bajas ({tasa_compra_excel}). Índice incorrecto o datos corruptos.")
                             continue
 
-                        # Búsqueda de la fecha de operación (Fila 6 o similar)
+                        # Búsqueda Mejorada y robusta de la fecha (Priorizando Fecha Valor)
                         try:
-                            fecha_row = df.iloc[5]
-                            if "Fecha Operacion" in str(fecha_row[0]):
-                                fecha_str = str(fecha_row[2]).split()[0] if fecha_row[2] and not str(fecha_row[2]).isspace() else str(fecha_row[3]).split()[0]
-                                fecha_operacion = datetime.datetime.strptime(fecha_str, "%d/%m/%Y").date()
-                        except Exception:
-                            pass
+                            # Buscamos primero "VALOR" y luego "OPERACION"
+                            for search_term in ["VALOR", "OPERACION"]:
+                                for r_idx in range(min(15, len(df))):
+                                    row_vals = [str(x) for x in df.iloc[r_idx]]
+                                    for c_idx, val in enumerate(row_vals):
+                                        if search_term in val.upper():
+                                            # 1. Intentar encontrar fecha en la misma celda
+                                            for part in val.replace(':', ' ').replace('-', ' ').split():
+                                                try:
+                                                    fecha_operacion = datetime.datetime.strptime(part.strip(), "%d/%m/%Y").date()
+                                                    break
+                                                except: continue
+                                            
+                                            if fecha_operacion: break
 
-                        logging.info(f"Datos BCV encontrados: Compra={tasa_compra_excel}, Venta={tasa_venta_excel}, Fecha={fecha_operacion}")
+                                            # 2. Intentar encontrar fecha en celdas a la derecha
+                                            for look_ahead in range(1, 5):
+                                                if c_idx + look_ahead < len(row_vals):
+                                                    try:
+                                                        cand = str(row_vals[c_idx + look_ahead]).strip().split()[0]
+                                                        fecha_operacion = datetime.datetime.strptime(cand, "%d/%m/%Y").date()
+                                                        break
+                                                    except: continue
+                                        if fecha_operacion: break
+                                    if fecha_operacion: break
+                                if fecha_operacion: break
+                        except Exception as e_date:
+                            logging.debug(f"Error en búsqueda dinámica de fecha: {e_date}")
+
+                        # VALIDACIÓN Modificada: Reglas estrictas por periodo
+                        hoy = date.today()
+                        periodo = os.getenv("PERIODO", "manana").lower()
+                        
+                        if periodo == "manana":
+                            # En la mañana esperamos estrictamente HOY
+                            if fecha_operacion != hoy:
+                                logging.warning(f"Validación Mañana: La fecha {fecha_operacion} no es HOY ({hoy}). Activando contingencia.")
+                                return 0.0, 0.0, fecha_operacion if fecha_operacion else hoy
+                        else:
+                            # En la tarde esperamos estrictamente el PRÓXIMO DÍA HÁBIL
+                            proximo_habil = obtener_proximo_dia_habil(hoy)
+                            if fecha_operacion != proximo_habil:
+                                logging.warning(f"Validación Tarde: La fecha {fecha_operacion} NO es el próximo día hábil ({proximo_habil}). Activando contingencia.")
+                                return 0.0, 0.0, fecha_operacion if fecha_operacion else hoy
+
+                        logging.info(f"Datos BCV validados para {periodo.upper()}: Compra={tasa_compra_excel}, Venta={tasa_venta_excel}, Fecha={fecha_operacion}")
                         return tasa_compra_excel, tasa_venta_excel, fecha_operacion
 
                     except Exception as e:
@@ -306,7 +355,7 @@ def extraer_tasa_usd(filepath):
 
                 tasa_compra_excel = None
                 tasa_venta_excel = None
-                fecha_operacion = date.today()
+                fecha_operacion = None # Inicializamos en None para validar obligatoriamente
 
                 for r in range(sheet.nrows):
                     # Asegurar índices
@@ -331,22 +380,51 @@ def extraer_tasa_usd(filepath):
                                 logging.warning(f"Tasas muy bajas ({tasa_compra_excel}). Índice incorrecto o datos corruptos.")
                                 continue
 
-                            # Buscar fecha en filas superiores (ej. fila 6 -> índice 5)
+                            # Búsqueda dinámica de fecha (xlrd) priorizando VALOR
                             try:
-                                for fr in range(min(8, sheet.nrows)):
-                                    cell0 = str(cell_val(fr, 0))
-                                    if "FECHA" in cell0.upper() or "FECHA OPERACION" in cell0.upper():
-                                        # intentar leer fecha de columnas cercanas
-                                        posible = str(cell_val(fr, 2)).split()[0] if sheet.ncols > 2 and str(cell_val(fr, 2)).strip() else (str(cell_val(fr,3)).split()[0] if sheet.ncols > 3 else "")
-                                        try:
-                                            fecha_operacion = datetime.datetime.strptime(posible, "%d/%m/%Y").date()
-                                            break
-                                        except Exception:
-                                            continue
+                                for s_term in ["VALOR", "OPERACION"]:
+                                    for fr in range(min(15, sheet.nrows)):
+                                        for fc in range(min(5, sheet.ncols)):
+                                            val = str(cell_val(fr, fc)).upper()
+                                            if s_term in val:
+                                                # 1. Intentar encontrar fecha en la misma celda
+                                                for part in val.replace(':', ' ').replace('-', ' ').split():
+                                                    try:
+                                                        fecha_operacion = datetime.datetime.strptime(part.strip(), "%d/%m/%Y").date()
+                                                        break
+                                                    except: continue
+                                                
+                                                if fecha_operacion: break
+
+                                                # 2. Intentar celdas a la derecha
+                                                for lax in range(1, 5):
+                                                    if fc + lax < sheet.ncols:
+                                                        try:
+                                                            posible = str(cell_val(fr, fc + lax)).strip().split()[0]
+                                                            fecha_operacion = datetime.datetime.strptime(posible, "%d/%m/%Y").date()
+                                                            break
+                                                        except: continue
+                                            if fecha_operacion: break
+                                        if fecha_operacion: break
+                                    if fecha_operacion: break
                             except Exception:
                                 pass
 
-                            logging.info(f"Datos BCV encontrados (xlrd): Compra={tasa_compra_excel}, Venta={tasa_venta_excel}, Fecha={fecha_operacion}")
+                            # VALIDACIÓN Modificada (xlrd): Reglas estrictas
+                            hoy = date.today()
+                            periodo = os.getenv("PERIODO", "manana").lower()
+                            
+                            if periodo == "manana":
+                                if fecha_operacion != hoy:
+                                    logging.warning(f"Validación Mañana (xlrd): {fecha_operacion} != {hoy}.")
+                                    return 0.0, 0.0, fecha_operacion if fecha_operacion else hoy
+                            else:
+                                proximo_habil = obtener_proximo_dia_habil(hoy)
+                                if fecha_operacion != proximo_habil:
+                                    logging.warning(f"Validación Tarde (xlrd): {fecha_operacion} != {proximo_habil} (Próximo hábil).")
+                                    return 0.0, 0.0, fecha_operacion if fecha_operacion else hoy
+
+                            logging.info(f"Datos BCV validados (xlrd) para {periodo.upper()}: Compra={tasa_compra_excel}, Venta={tasa_venta_excel}, Fecha={fecha_operacion}")
                             return tasa_compra_excel, tasa_venta_excel, fecha_operacion
 
                         except Exception as e:
@@ -479,7 +557,7 @@ def ejecutar_sp_carga_tasa(periodo, fecha, valor_compra, valor_venta):
 
 def enviar_correo(tipo, fecha, valor_compra, valor_venta, contingencia=False):
     
-    # Validación de la configuración SMTP (Robustez contra NoneType)
+    # Validación de la configuración SMTP
     if not SMTP_SERVER or not SMTP_USER or not SMTP_PASS or not EMAIL_DESTINO:
         logging.error("Error CRÍTICO de CONFIGURACIÓN: Faltan variables SMTP (SERVER, USER, PASS, o DESTINO) en .env.")
         return False
@@ -492,7 +570,7 @@ def enviar_correo(tipo, fecha, valor_compra, valor_venta, contingencia=False):
             Se ha aplicado automáticamente la <strong>tasa de cierre del día hábil anterior</strong> para garantizar la continuidad del sistema.
         </div>
         """
-    # Formateo robusto de valores (soporta valor_venta = None)
+    # Formateo Mejorado y robusto de valores (soporta valor_venta = None)
     def _fmt(v):
         try:
             return "{:.4f}".format(0.0 if v is None else float(v))
@@ -503,7 +581,7 @@ def enviar_correo(tipo, fecha, valor_compra, valor_venta, contingencia=False):
     venta_display = _fmt(valor_venta)
 
     # CORRECCIÓN CRÍTICA: Inicializar variables para prevenir NameError/UnboundLocalError
-    asunto = "ASUNTO BCV PENDIENTE" 
+    asunto = "ASUNTO TASA BCV PENDIENTE" 
     cuerpo_html = ""
 
     # ------------------ CONSTRUCCIÓN DEL CONTENIDO ------------------
@@ -634,7 +712,8 @@ def enviar_correo_fallo(asunto, cuerpo_error):
     cuerpo_html = f"""
     <html><body>
     <p>ATENCIÓN, ha ocurrido un fallo crítico en el proceso de tasas BCV.</p>
-    <p><b>Error Detallado:</b> {cuerpo_error}</p>
+    <p><b>Detalle de Error en el Proceso:</b> {cuerpo_error}</p>
+     <p>El Equipo Tecnico TRANRED estara validando este Error.</p>
     </body></html>
     """
     
@@ -655,6 +734,36 @@ def enviar_correo_fallo(asunto, cuerpo_error):
     except smtplib.SMTPAuthenticationError:
         return False
 
+def obtener_ultima_tasa_bd():
+    """Busca la última tasa registrada en la base de datos para usar en contingencia."""
+    try:
+        conn = get_db_connection(2000)
+        cursor = conn.cursor()
+        # Buscamos el registro más reciente (el del día hábil anterior)
+        cursor.execute("SELECT TOP 1 valor, ISNULL(valorVenta, 0) FROM [dbo].[tasas_dicom] ORDER BY fecha DESC")
+        row = cursor.fetchone()
+        conn.close()
+        if row:
+            logging.info(f"Tasa de respaldo recuperada de BD: Compra={row[0]}, Venta={row[1]}")
+            return float(row[0]), float(row[1])
+    except Exception as e:
+        logging.error(f"No se pudo recuperar la tasa de respaldo de la BD: {e}")
+    return 0.0, 0.0
+
+def obtener_valor_compra_actual(fecha):
+    """Consulta el valor de compra (columna 'valor') actual en la BD para una fecha."""
+    try:
+        conn = get_db_connection(2000)
+        cursor = conn.cursor()
+        cursor.execute("SELECT valor FROM dbo.tasas_dicom WHERE fecha = ?", fecha.strftime("%Y-%m-%d"))
+        row = cursor.fetchone()
+        conn.close()
+        if row and row[0] is not None:
+            return float(row[0])
+    except Exception as e:
+        logging.debug(f"No se encontró valor previo para {fecha}: {e}")
+    return None
+
 # ----------------------------- LÓGICA DE PROCESAMIENTO (ANTES DE MAIN) -------------------------------- #
 
 def procesar_logica_periodo(valor_compra, valor_venta, fecha_tasa, es_contingencia=False):
@@ -671,14 +780,46 @@ def procesar_logica_periodo(valor_compra, valor_venta, fecha_tasa, es_contingenc
     tipo = 'COMPRA' if periodo == 'manana' else 'VENTA'
 
     # --- LÓGICA DE CONTINGENCIA ---
-    # Si la fecha del archivo no es la de hoy, o no hay valores
-    if fecha_tasa != hoy or valor_compra == 0:
-        logging.warning(f"⚠️ Contingencia activada: No se encontró publicación oficial para {hoy}. Aplicando tasa del día anterior.")
-        # Enviamos 0 para que el SP busque el respaldo en la BD
-        valor_compra = 0
-        valor_venta = 0
+    # Calculamos la fecha que esperamos recibir según el periodo
+    fecha_esperada = hoy if periodo == 'manana' else obtener_proximo_dia_habil(hoy)
+
+    # Si la fecha del archivo no es la válida para el periodo, activamos respaldo
+    if fecha_tasa != fecha_esperada or valor_compra == 0:
+        
+        # Validación especial solicitada para el periodo TARDE:
+        # Solo permitir contingencia después de las 21:00
+        if periodo == 'tarde':
+            hora_actual = datetime.datetime.now().time()
+            backfill_time = datetime.time(21, 0)
+            
+            if hora_actual < backfill_time:
+                logging.info(f"⏳ Periodo TARDE: El archivo BCV no tiene la fecha del próximo día hábil todavía.")
+                logging.info(f"   Se omitirá el proceso hasta las 21:00 para esperar actualización oficial.")
+                return # SALIR SIN PROCESAR
+        
+        logging.warning(f"⚠️ Contingencia activada: No se encontró publicación oficial válida para {periodo.upper()}. Recuperando tasa de respaldo...")
+        
+        # Buscar el último valor real en la base de datos
+        valor_compra_prev, valor_venta_prev = obtener_ultima_tasa_bd()
+        
+        if valor_compra_prev > 0:
+            valor_compra = valor_compra_prev
+            valor_venta = valor_venta_prev
+            logging.info(f"Aplicando tasa referencial: Compra={valor_compra}, Venta={valor_venta}")
+        else:
+            logging.error("No se pudo obtener una tasa referencial válida de la BD. Se enviará 0.")
+            valor_compra = 0
+            valor_venta = 0
+        
         fecha_tasa = hoy 
     
+    # REGLA DE NEGOCIO: En la tarde, el valor de compra (valor) no debe cambiar si ya existe
+    if periodo == 'tarde' and not es_contingencia:
+        valor_db = obtener_valor_compra_actual(fecha_tasa)
+        if valor_db is not None:
+            logging.info(f"Regla de Negocio Tarde: Preservando valor de compra existente en BD ({valor_db})")
+            valor_compra = valor_db
+
     # Verificar si ya se envió para evitar duplicidad
     if leer_estado_envio(tipo) and leer_estado_envio(tipo) >= hoy:
         logging.info(f"Tasa de {tipo} para {hoy} ya fue procesada anteriormente. Omitiendo.")
@@ -688,7 +829,7 @@ def procesar_logica_periodo(valor_compra, valor_venta, fecha_tasa, es_contingenc
     try:
         ejecutar_sp_carga_tasa(periodo, hoy, valor_compra, valor_venta)
         
-        # Opcional: Podrías querer avisar en el correo que es una tasa de contingencia
+        # Opcional: avisar en el correo que es una tasa de contingencia
         es_contingencia = (valor_compra == 0)
         if enviar_correo(tipo, hoy, valor_compra, valor_venta, contingencia=es_contingencia):
             guardar_estado_envio(hoy, tipo)
@@ -700,7 +841,6 @@ def procesar_logica_periodo(valor_compra, valor_venta, fecha_tasa, es_contingenc
 
 
 # ----------------------------- BACKFILL ( Agregado Cambio de alcance) -------------------------------- #
-
 def backfill_tasa_si_no_actualizada(fecha=None, force=False):
     """
     Si no hay tasa para `fecha` en la BD final, copia la última tasa anterior y llama al SP.
@@ -709,9 +849,18 @@ def backfill_tasa_si_no_actualizada(fecha=None, force=False):
     fecha = fecha or datetime.date.today()
     fecha_str = fecha.strftime("%Y-%m-%d")
 
-    # Permitir forzar ejecución fuera de horario con env var o flag
+    ahora = datetime.datetime.now().time()
+    hora_ejecucion = datetime.time(21, 0)  # 21:00
+
+    # Bloqueo por horario
+    if not force and ahora < hora_ejecucion:
+        logging.info(
+            f"Backfill no ejecutado: hora actual {ahora}, permitido a partir de las 21:00"
+        )
+        return False
+
+    # Permitir forzar ejecución manual
     if not force and os.getenv("FORCE_BACKFILL") not in ("1", "true", "True"):
-        # caller debe asegurarse de invocar a la hora deseada (23:59) o pasar force=True
         logging.info("Backfill no ejecutado: force no activado.")
         return False
 
@@ -720,15 +869,21 @@ def backfill_tasa_si_no_actualizada(fecha=None, force=False):
         cur = conn.cursor()
 
         # 1) Verificar si ya existe la tasa para la fecha objetivo
-        cur.execute("SELECT TOP 1 valor, ISNULL(valorVenta, NULL) FROM dbo.tasas_dicom WHERE fecha = ?", (fecha_str,))
+        cur.execute(
+            "SELECT TOP 1 valor, ISNULL(valorVenta, NULL) FROM dbo.tasas_dicom WHERE fecha = ?",
+            (fecha_str,)
+        )
         existente = cur.fetchone()
         if existente:
             logging.info("Backfill: tasa ya presente para %s, nada por hacer.", fecha_str)
             conn.close()
             return False
 
-        # 2) Obtener la tasa más reciente anterior a la fecha
-        cur.execute("SELECT TOP 1 valor, ISNULL(valorVenta, NULL) FROM dbo.tasas_dicom WHERE fecha < ? ORDER BY fecha DESC", (fecha_str,))
+        # 2) Obtener la tasa más reciente anterior a la fecha 
+        cur.execute(
+            "SELECT TOP 1 valor, ISNULL(valorVenta, NULL) FROM dbo.tasas_dicom WHERE fecha < ? ORDER BY fecha DESC",
+            (fecha_str,)
+        )
         row = cur.fetchone()
         conn.close()
 
@@ -737,106 +892,62 @@ def backfill_tasa_si_no_actualizada(fecha=None, force=False):
             return False
 
         valor_compra_prev, valor_venta_prev = row[0], row[1]
-        logging.info("Backfill: aplicando tasa anterior para %s -> compra=%s venta=%s", fecha_str, valor_compra_prev, valor_venta_prev)
+        logging.info(
+            "Backfill: aplicando tasa anterior para %s -> compra=%s venta=%s",
+            fecha_str, valor_compra_prev, valor_venta_prev
+        )
 
         periodo_backfill = os.getenv("PERIODO_BACKFILL", "tarde").lower()
-        # Reusar la función que ejecuta el SP para mantener consistencia y logging
         ejecutar_sp_carga_tasa(periodo_backfill, fecha, valor_compra_prev, valor_venta_prev)
         logging.info("Backfill: SP ejecutado para fecha %s", fecha_str)
         return True
 
     except Exception as e:
-        logging.error("Backfill: error al intentar aplicar tasa anterior para %s: %s", fecha_str, e)
+        logging.error(
+            "Backfill: error al intentar aplicar tasa anterior para %s: %s",
+            fecha_str, e
+        )
         return False
 
-# ----------------------------- MAIN EXECUTION -------------------------------- #
+# ----------------------------- ENTRY POINT -------------------------------- #
 
-def main():
-    archivo_path = None
-    try:
-        logging.info("Iniciando proceso BCV...")
-        limpiar_estado_antiguo()
-        
-        # soporte para invocación manual de backfill
-        if "--backfill-now" in sys.argv or os.getenv("FORCE_BACKFILL") in ("1", "true", "True"):
-            logging.info("Modo backfill detectado (--backfill-now o FORCE_BACKFILL). Ejecutando backfill y saliendo.")
-            backfill_tasa_si_no_actualizada(force=True)
-            return
-
-        periodo = os.getenv("PERIODO", "manana").lower()
-        logging.info(f"Modo de ejecución detectado: {periodo.upper()}")
-        
-        # 1. Descargar el archivo
-        try:
-            archivo_path, fecha_intento = descargar_archivo() 
-        except Exception as e:
-            logging.critical(f"FALLO CRÍTICO DE DESCARGA: {e}")
-            enviar_correo_fallo("FALLO CRITICO: Descarga BCV", f"Fallo al descargar el archivo: {e}")
-            raise 
-            
-        # 2. Extraer las tasas del Excel
-        valor_compra, valor_venta, fecha_tasa = extraer_tasa_usd(archivo_path)
-        
-        # 3. Procesar e insertar en base de datos y notificar
-        procesar_logica_periodo(valor_compra, valor_venta, fecha_tasa) # CORRECCIÓN 1
-        
-        logging.info("Proceso completado correctamente.")
-        
-    except Exception as e:
-        logging.error(f"Error crítico en la ejecución principal: {e}")
-        if 'archivo_path' in locals() and archivo_path:
-            enviar_correo_fallo("FALLO GENERAL: Proceso BCV", f"Error en extracción o DB: {e}") # CORRECCIÓN 1
-        
-    finally:
-        # Limpieza del archivo temporal
-        if 'archivo_path' in locals() and archivo_path and os.path.exists(archivo_path):
-            try:
-                os.remove(archivo_path)
-                logging.info(f"Archivo temporal {os.path.basename(archivo_path)} eliminado.")
-            except Exception as e:
-                logging.error(f"Error al intentar eliminar el archivo temporal: {e}")
-        
-        # --- Simulando el flujo en bloque main ---
-        try:
-            filepath, fecha_archivo = descargar_archivo()
-            tasa_c, tasa_v, fecha_op = extraer_tasa_usd(filepath)
-            
-            # Si todo va bien, procesamos normal
-            procesar_logica_periodo(tasa_c, tasa_v, fecha_op)
-
-        except Exception as e:
-            logging.error(f"No se pudo obtener la tasa del BCV: {e}")
-            # SI FALLA TODO, forzamos el llamado al SP con ceros para cumplir el alcance
-            logging.info("Iniciando carga automática por falta de publicación oficial...")
-            procesar_logica_periodo(0, 0, datetime.date.today())
 if __name__ == "__main__":
     logging.info("=== INICIANDO PROCESO DE ACTUALIZACIÓN DE TASAS BCV ===")
     
     try:
-        # 1. Limpieza de logs antiguos
+        # 1. Limpieza de logs de estado antiguos (mantener 15 días)
         limpiar_estado_antiguo(dias=15)
         
+        # 2. Intentar Descarga y Procesamiento de la Tasa del día
         try:
-            # 2. Intentar flujo normal: Descarga y Extracción
-            filepath, fecha_archivo = descargar_archivo()
-            tasa_compra, tasa_venta, fecha_operacion = extraer_tasa_usd(filepath)
+            # Intenta descargar el archivo del portal BCV
+            filepath, fecha_descarga = descargar_archivo()
             
-            logging.info(f"Datos oficiales obtenidos exitosamente para la fecha: {fecha_operacion}")
-            procesar_logica_periodo(tasa_compra, tasa_venta, fecha_operacion)
-
-        except Exception as e_bcv:
-            # 3. FALLBACK: Si falla la descarga o el archivo no tiene la fecha de hoy
-            logging.error(f"No se pudo obtener la tasa oficial del BCV: {e_bcv}")
-            logging.warning("Iniciando MODO CONTINGENCIA: Aplicando regla de tasa del día anterior.")
+            # Extrae los valores de compra y venta del Excel
+            compra, venta, fecha_tasa = extraer_tasa_usd(filepath)
             
-            # Llamamos a la lógica con valores 0 para activar el fallback en el Stored Procedure
-            # Usamos la fecha de hoy porque es la que necesitamos cubrir
-            procesar_logica_periodo(0, 0, date.today(), es_contingencia=True)
+            if compra == 0:
+                logging.info(f"Omitiendo datos de archivo: No se detectó tasa oficial válida para hoy ({fecha_tasa}).")
+            else:
+                logging.info(f"Datos oficiales obtenidos exitosamente para la fecha: {fecha_tasa}")
+            
+            # Ejecuta la lógica de inserción y notificación
+            procesar_logica_periodo(compra, venta, fecha_tasa)
+            
+        except Exception as e:
+            logging.warning(f"No se pudo completar el ciclo normal de descarga/extracción: {e}")
+            logging.info("Iniciando flujo de contingencia (aplicación de tasa anterior)...")
+            
+            # Si falla la descarga, procesamos bajo lógica de contingencia (valor 0 para disparar respaldo en SP)
+            procesar_logica_periodo(0, 0, datetime.date.today())
 
-    except Exception as e_critico:
-        # 4. Error catastrófico (Base de datos caída o error de red total)
-        error_msg = f"Fallo crítico en el script: {str(e_critico)}"
+        # 3. Ejecutar Backfill (Solo si es después de las 21:00 o si FORCE_BACKFILL está activo)
+        backfill_tasa_si_no_actualizada()
+
+    except Exception as e:
+        # Captura de errores fatales fuera de la lógica estándar
+        error_msg = f"Error fatal fuera de la lógica de procesamiento: {str(e)}"
         logging.critical(error_msg)
-        enviar_correo_fallo("CRÍTICO: Fallo Total Proceso Tasas", error_msg)
+        enviar_correo_fallo("FALLO CRÍTICO - Ejecutor del Sistema", error_msg)
     
     logging.info("=== FIN DEL PROCESO ===")

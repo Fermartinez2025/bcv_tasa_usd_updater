@@ -1,0 +1,15 @@
+2026-04-14 08:54:47 [INFO] === INICIANDO PROCESO DE ACTUALIZACIÓN DE TASAS BCV ===
+2026-04-14 08:54:47 [INFO] Estado de correo limpiado. Registros de los últimos 15 días mantenidos.
+2026-04-14 08:54:48 [INFO] Conexión a SQL Server 2019 (MilPagos) exitosa.
+2026-04-14 08:54:48 [INFO] Intentando descargar 2_1_2b26_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2b26_smc.xls...
+2026-04-14 08:54:48 [INFO] Archivo descargado: logs\2_1_2b26_smc.xls
+2026-04-14 08:54:48 [INFO] Iniciando extracción del archivo...
+2026-04-14 08:54:48 [INFO] Datos BCV validados para MANANA: Compra=476.4318, Venta=477.6259, Fecha=2026-04-14
+2026-04-14 08:54:48 [INFO] Datos oficiales obtenidos exitosamente para la fecha: 2026-04-14
+2026-04-14 08:54:48 [INFO] [DB] Intento 1/3: Ejecutando SP sp_carga_tasa para manana - fecha=2026-04-14
+2026-04-14 08:54:49 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2026-04-14 08:54:49 [INFO] [DB] SP returned rc=0 (success) for fecha=2026-04-14; no verification SELECT required.
+2026-04-14 08:54:49 [INFO] Conectando a SMTP en puerto 587...
+2026-04-14 08:54:52 [INFO] Correo enviado exitosamente - ACTUALIZACIÓN 1/2 BCV: Tasa de COMPRA USD - 14/04/2026 (476.4318)
+2026-04-14 08:54:52 [INFO] Backfill no ejecutado: hora actual 08:54:52.641359, permitido a partir de las 21:00
+2026-04-14 08:54:52 [INFO] === FIN DEL PROCESO ===
