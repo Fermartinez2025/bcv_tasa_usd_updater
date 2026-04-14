@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment (Secrets - NUNCA SUBIR AL REPOSITORIO)
+.env
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
+
+# Project Specific (Logs y archivos descargados)
+logs/*.xls
+logs/*.xlsx
+# logs/estado_correo.txt   # Descomentar si no quieres trackear el estado del correo
+scratch/
+
+# OS
+.DS_Store
+Thumbs.db

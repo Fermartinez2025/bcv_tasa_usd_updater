@@ -28,7 +28,81 @@ El sistema automatiza el ciclo de vida completo de la información cambiaria: de
 ---
 
 ##  Estructura del Proyecto
-... (omitiendo para brevedad en el diff) ...
+
+```text
+.
+├── main.py                # Núcleo del sistema y lógica de procesamiento.
+├── .env                   # Configuración de credenciales y parámetros (No versionado).
+├── Dockerfile             # Configuración para despliegue en contenedores.
+├── entrypoint.sh          # Script de orquestación para entornos Linux/Docker.
+├── requirements.txt       # Dependencias del ecosistema Python.
+├── sql/                   # Procedimientos almacenados y scripts de DB.
+├── logs/                  # Registro histórico de ejecuciones y estados de correo.
+└── bcv_tasa_usd_updater/  # Documentación técnica extendida.
+```
+
+---
+
+##  Configuración del Entorno (.env)
+
+Cree un archivo `.env` en la raíz del proyecto con la siguiente estructura:
+
+###  Configuración de Correo (SMTP)
+| Variable | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `SMTP_SERVER` | Servidor SMTP corporativo | `smtp.office365.com` |
+| `SMTP_PORT` | Puerto de conexión (TLS) | `587` |
+| `SMTP_USER` | Usuario/Correo remitente | `alertas@tranred.com` |
+| `SMTP_PASS` | **Password de Aplicación** | `xxxx-xxxx-xxxx-xxxx` |
+| `EMAIL_DESTINO` | Destinatario principal | `finanzas@tranred.com` |
+
+###  Bases de Datos
+| Variable | Descripción |
+| :--- | :--- |
+| `SQL2019_SERVER` | Host/IP del servidor SQL Server 2019 (Validaciones) |
+| `SQL2000_SERVER` | Host/IP del servidor SQL Server 2000 (Producción) |
+| `SQL2000_DB_FINAL`| Nombre de la BD destino (`tasas_dicom`) |
+
+###  Lógica de Operación
+| Variable | Descripción | Valores |
+| :--- | :--- | :--- |
+| `PERIODO` | Indica el bloque de ejecución | `manana` (Compra) / `tarde` (Cierre) |
+| `FORCE_BACKFILL`| Fuerza la aplicación de la tasa anterior | `true` / `false` |
+| `DB_MAX_ATTEMPTS`| Máximo de reintentos de conexión a DB | `3` |
+
+---
+
+##  Instalación y Despliegue
+
+### 💻 Ejecución Local (Desarrollo)
+
+1.  **Entorno Virtual**:
+    ```bash
+    python -m venv .venv
+    # Windows:
+    .\.venv\Scripts\activate
+    # Linux:
+    source .venv/bin/activate
+    ```
+2.  **Dependencias**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  **Ejecutar**:
+    ```bash
+    python main.py
+    ```
+
+###  Ejecución con Docker
+
+1.  **Construcción**:
+    ```bash
+    docker build -t bcv-updater .
+    ```
+2.  **Despliegue**:
+    ```bash
+    docker run --env-file .env -v $(pwd)/logs:/app/logs bcv-updater
+    ```
 
 ---
 
@@ -62,4 +136,3 @@ El sistema automatiza el ciclo de vida completo de la información cambiaria: de
 
 ---
 © 2026 TRANRED - Todos los derechos reservados.
-"# bcv_tasa_usd_updater" 
