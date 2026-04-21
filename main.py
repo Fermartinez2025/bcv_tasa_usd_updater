@@ -136,9 +136,14 @@ def get_db_connection(server_type):
         USER = os.getenv('SQL2019_USER')
         PASS = os.getenv('SQL2019_PASS')
         DB = os.getenv('SQL2019_DB_TEMP')
-        # Usar driver 17 si se está en ambiente moderno (Windows o Linux con driver instalado)
+        # En Linux/Windows usamos Driver 17 que está instalado según odbcinst
         DRIVER = '{ODBC Driver 17 for SQL Server}' 
-        conn_str = f"DRIVER={DRIVER};SERVER={SERVER};DATABASE={DB};UID={USER};PWD={PASS};"
+        # Forzamos puerto 1433 y protocolo TCP
+        conn_str = (
+            f"DRIVER={DRIVER};SERVER={SERVER},1433;DATABASE={DB};"
+            f"UID={USER};PWD={PASS};Network=dbmssocn;Encrypt=no;"
+            f"TrustServerCertificate=yes;Connection Timeout=30;"
+        )
     elif server_type == 2000:
         SERVER = os.getenv('SQL2000_SERVER')
         USER = os.getenv('SQL2000_USER')
@@ -146,12 +151,11 @@ def get_db_connection(server_type):
         DB = os.getenv('SQL2000_DB_FINAL')
         PORT = os.getenv('SQL2000_PORT', '1433')
         
-        # Corrección SQL 2000: Usar el driver nativo con lógica de plataforma
         if platform.system() == "Windows":
              DRIVER = '{SQL Server}' 
              conn_str = f"DRIVER={DRIVER};SERVER={SERVER},{PORT};DATABASE={DB};UID={USER};PWD={PASS};"
         else:
-            
+             # En Linux usamos FreeTDS que está verificado en el sistema
              DRIVER = '{FreeTDS}'
              conn_str = f"DRIVER={DRIVER};SERVER={SERVER};PORT={PORT};DATABASE={DB};UID={USER};PWD={PASS};TDS_Version=7.0;"
     else:

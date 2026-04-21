@@ -1,0 +1,16 @@
+2026-04-15 10:55:39 [INFO] === INICIANDO PROCESO DE ACTUALIZACIÓN DE TASAS BCV ===
+2026-04-15 10:55:39 [INFO] Estado de correo limpiado. Registros de los últimos 15 días mantenidos.
+2026-04-15 10:56:16 [ERROR] Error al conectar a SQL Server 2019: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [64].  (64) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Login timeout expired (0); [08001] [Microsoft][ODBC Driver 17 for SQL Server]A network-related or instance-specific error has occurred while establishing a connection to SQL Server. Server is not found or not accessible. Check if instance name is correct and if SQL Server is configured to allow remote connections. For more information see SQL Server Books Online. (64)')
+2026-04-15 10:56:16 [WARNING] Error al verificar feriados: Fallo en conexión a SQL 2019: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Named Pipes Provider: Could not open a connection to SQL Server [64].  (64) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Login timeout expired (0); [08001] [Microsoft][ODBC Driver 17 for SQL Server]A network-related or instance-specific error has occurred while establishing a connection to SQL Server. Server is not found or not accessible. Check if instance name is correct and if SQL Server is configured to allow remote connections. For more information see SQL Server Books Online. (64)'). Asumiendo día hábil.
+2026-04-15 10:56:16 [INFO] Intentando descargar 2_1_2b26_smc.xls desde https://www.bcv.org.ve/sites/default/files/EstadisticasGeneral/2_1_2b26_smc.xls...
+2026-04-15 10:56:16 [INFO] Archivo descargado: logs\2_1_2b26_smc.xls
+2026-04-15 10:56:16 [INFO] Iniciando extracción del archivo...
+2026-04-15 10:56:16 [INFO] Datos BCV validados para MANANA: Compra=477.3846, Venta=478.5811, Fecha=2026-04-15
+2026-04-15 10:56:16 [INFO] Datos oficiales obtenidos exitosamente para la fecha: 2026-04-15
+2026-04-15 10:56:16 [INFO] [DB] Intento 1/3: Ejecutando SP sp_carga_tasa para manana - fecha=2026-04-15
+2026-04-15 10:56:17 [INFO] Conexión a SQL Server 2000 (rep_post_dia) exitosa.
+2026-04-15 10:56:17 [INFO] [DB] SP returned rc=0 (success) for fecha=2026-04-15; no verification SELECT required.
+2026-04-15 10:56:17 [INFO] Conectando a SMTP en puerto 587...
+2026-04-15 10:56:21 [INFO] Correo enviado exitosamente - ACTUALIZACIÓN 1/2 BCV: Tasa de COMPRA USD - 15/04/2026 (477.3846)
+2026-04-15 10:56:21 [INFO] Backfill no ejecutado: hora actual 10:56:21.628117, permitido a partir de las 21:00
+2026-04-15 10:56:21 [INFO] === FIN DEL PROCESO ===
